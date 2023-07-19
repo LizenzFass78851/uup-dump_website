@@ -45,6 +45,16 @@ if(!isset($templateOk)) die();
                 <div class="row">
                     <div class="column">
                         <p><?= $noLangsCause ?></p>
+                        <?php if($generatePacksButton): ?>
+                            <form action="selectlang.php" method="get">
+                                <input type="hidden" name="id" value="<?= $updateId ?>" />
+                                <input type="hidden" name="packs" value="1" />
+                                <button class="ui fluid right labeled icon button">
+                                    <i class="pencil alternate icon"></i>
+                                    Generate metadata
+                                </button>
+                            </form>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

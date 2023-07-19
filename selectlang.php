@@ -16,11 +16,14 @@ limitations under the License.
 */
 
 $updateId = isset($_GET['id']) ? $_GET['id'] : 0;
+$getPacks = isset($_GET['packs']) ? $_GET['packs'] : 0;
 
 require_once 'api/listlangs.php';
 require_once 'api/updateinfo.php';
 require_once 'shared/style.php';
 require_once 'shared/utils.php';
+require_once dirname(__FILE__).'/sta/main.php';
+require_once dirname(__FILE__).'/sta/genpack.php';
 
 function getLangs($updateId, $s) {
     $langs = uupListLangs($updateId);
@@ -48,6 +51,10 @@ if(!$updateId) {
 if(!checkUpdateIdValidity($updateId)) {
     fancyError('INCORRECT_ID', 'downloads');
     die();
+}
+
+if($getPacks) {
+    generatePack($updateId);
 }
 
 $updateInfo = uupUpdateInfo($updateId, ignoreFiles: true);
@@ -132,11 +139,13 @@ $packsAvailable = uupApiPacksExist($updateId);
 
 $noLangsIcon = 'times circle outline';
 $noLangsCause = $s['updateIsBlocked'];
+$generatePacksButton = false;
 
 if(!$packsAvailable) {
-    $noLangsIcon = 'hourglass half';
-    $noLangsCause = sprintf($s['updateNotProcessed'], 30);
+    $noLangsIcon = 'industry';
+    $noLangsCause = 'Metadata for this update is not generated.';
     $updateBlocked = true;
+	$generatePacksButton = true;
 } else if(!$updateBlocked && !$langsAvailable) {
     $noLangsIcon = 'info';
     $noLangsCause = $s['noLangsAvailable'];
