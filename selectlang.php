@@ -103,7 +103,9 @@ if(in_array(strtolower($s['code']), array_keys($langs))) {
 }
 
 //Set fancy name for channel and flight of build
-if($ring == 'WIF' && $flight == 'Skip') {
+if($ring == 'CANARY' && $flight == 'Active') {
+    $fancyChannelName = $s['channel_canary'];
+} elseif($ring == 'WIF' && $flight == 'Skip') {
     $fancyChannelName = $s['channel_skipAhead'];
 } elseif($ring == 'WIF' && $flight == 'Active') {
     $fancyChannelName = $s['channel_dev'];

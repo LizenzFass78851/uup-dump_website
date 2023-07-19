@@ -17,10 +17,11 @@ limitations under the License.
 
 $updateId = isset($_GET['id']) ? $_GET['id'] : null;
 $search = isset($_GET['q']) ? $_GET['q'] : null;
+$aria2 = isset($_GET['aria2']) ? $_GET['aria2'] : null;
 
 require_once 'api/get.php';
 require_once 'api/updateinfo.php';
-require_once 'shared/get.php';
+require_once 'public/get.php';
 require_once 'shared/style.php';
 require_once 'shared/ratelimits.php';
 
@@ -60,7 +61,8 @@ if($search != null) {
 
     $removeKeys = preg_grep('/.*'.$searchSafe.'.*/i', $filesKeys, PREG_GREP_INVERT);
     if($search == "Windows KB") {
-        $removeKeys = array_merge($removeKeys, preg_grep('/Windows(10|11)\.0-KB.*-EXPRESS|SSU-.*-.{3,5}-EXPRESS|SSU-.*?\.psf/i', $filesKeys));
+        $removeKeys = array_merge($removeKeys, preg_grep('/Windows(10|11)\.0-KB.*-EXPRESS|SSU-.*-EXPRESS|SSU-.*?\.psf/i', $filesKeys));
+        if($updateBuild < 17763) $removeKeys = array_merge($removeKeys, preg_grep('/Windows(10|11)\.0-KB.*_\d\.psf$/i', $filesKeys));
     }
 
     foreach($removeKeys as $value) {
@@ -77,6 +79,20 @@ if($search != null) {
 }
 
 $urlBase = "getfile.php?id=$updateId";
+
+if($aria2) {
+    $urlBase = getBaseUrl()."/".$urlBase;
+    header('Content-Type: text/plain');
+
+    usort($filesKeys, 'sortBySize');
+    foreach($filesKeys as $val) {
+        echo "$urlBase&file=$val\n";
+        echo '  out='.$val."\n";
+        echo '  checksum=sha-1='.$files[$val]['sha1']."\n\n";
+    }
+
+    die();
+}
 
 $count = count($filesKeys);
 

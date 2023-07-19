@@ -17,7 +17,7 @@ limitations under the License.
 
 require_once 'api/get.php';
 require_once 'shared/utils.php';
-require_once 'shared/get.php';
+require_once 'public/get.php';
 
 class AutoDlConfig {
     private $files;
@@ -101,7 +101,21 @@ class AutoDlConfig {
 
     private function supportsApps() {
         $isBlocked = isUpdateBlocked($this->buildNum, $this->title);
-        return $this->buildNum > 22557 && !$isBlocked;
+
+        if($this->buildNum <= 22557 || $isBlocked)
+            return false;
+
+        $genPack = uupGetGenPacks($this->buildNum, $this->arch, $this->updateId);
+
+        if(empty($genPack) || !isset($genPack['neutral']))
+            return false;
+
+        $isAPP = false;
+        foreach(array_keys($genPack['neutral']) as $edition) {
+            if($edition == 'APP') $isAPP = true;
+        }
+
+        return $isAPP;
     }
 
     private function setUrlsForPacks() {

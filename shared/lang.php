@@ -15,14 +15,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-require_once "langs/en-us.php";
+require_once dirname(__FILE__).'/../public/langs/en-us.php';
 $lang = 'en-us';
+
+if($_SERVER['SERVER_NAME'] == '0.0.0.0') {
+    //$domain = $_SERVER['REMOTE_ADDR'];
+    $domain = substr_replace($_SERVER['HTTP_HOST'], '', -(strlen($_SERVER['SERVER_PORT'])+1));
+} else {
+    $domain = $_SERVER['SERVER_NAME'];
+}
 
 $pageLanguageOptions = array(
     'expires' => time()+60*60*24*30,
     'path' => '/',
-    'domain' => $_SERVER['SERVER_NAME'],
-    'secure' => true,
+    'domain' => $domain,
+    'secure' => isset($_SERVER['HTTPS']) ? true : false,
     'httponly' => true,
     'samesite' => 'Strict'
 );
@@ -55,14 +62,13 @@ $supportedLangs = array(
     'tr-tr',
     'ro-ro',
     'ru-ru',
-    'ru-ru',
 );
 
-if(in_array("$lang", $supportedLangs)) {
-    require_once "langs/$lang.php";
-} else {
+if(!in_array("$lang", $supportedLangs)) {
     $lang = 'en-us';
 }
+
+require_once "public/langs/$lang.php";
 
 if($sendCookie) {
     setcookie('Page-Language', $lang, $pageLanguageOptions);

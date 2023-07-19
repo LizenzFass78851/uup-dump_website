@@ -143,3 +143,21 @@ function areVirtualEditonsSupported($build, $sku) {
     $isServer = uupApiIsServer($sku);
     return $build >= 17107 && !$isServer;
 }
+
+function getDefaultLanguage() {
+    $config = uupDumpApiGetConfig();
+    return isset($config['test_lang']) ? $config['test_lang'] : 'en-us';
+}
+
+function getPageLanguageFromUrl() {
+    $uri = $_SERVER['REQUEST_URI'];
+    preg_match('/^\/(..-..)\//', $uri, $matches);
+    return isset($matches[1]) ? $matches[1] : getDefaultLanguage();
+}
+
+function urlWithoutLang($lang) {
+    $part = "/$lang/";
+    $len = strlen($part);
+    $uri = $_SERVER['REQUEST_URI'];
+    return str_starts_with($uri, $part) ? substr($uri, $len-1) : $uri;
+}

@@ -42,6 +42,7 @@ if(isset($fetchUpd['error'])) {
 $updateArray = $fetchUpd['updateArray'];
 
 $templateOk = true;
+
 styleUpper('downloads', $s['responseFromServer']);
 require 'templates/fetchupd.php';
 styleLower();

@@ -30,18 +30,25 @@ function styleUpper($pageType = 'home', $subtitle = '') {
         $subTitleOnly = htmlentities($s['uupdump']);
     }
 
+    if($_SERVER['SERVER_NAME'] == '0.0.0.0') {
+        //$domain = $_SERVER['REMOTE_ADDR'];
+        $domain = substr_replace($_SERVER['HTTP_HOST'], '', -(strlen($_SERVER['SERVER_PORT'])+1));
+    } else {
+        $domain = $_SERVER['SERVER_NAME'];
+    }
+
     $darkModeOptions = array(
         'expires' => time()+60*60*24*30,
         'path' => '/',
-        'domain' => $_SERVER['SERVER_NAME'],
-        'secure' => true,
+        'domain' => $domain,
+        'secure' => isset($_SERVER['HTTPS']) ? true : false,
         'httponly' => true,
         'samesite' => 'Strict'
     );
 
     $enableDarkMode = -1;
-    if(isset($_COOKIE['Dark-Mode'])) {
-        switch($_COOKIE['Dark-Mode']) {
+    if(isset($_GET['dark'])) {
+        switch($_GET['dark']) {
             case 0:
                 setcookie('Dark-Mode', 0, $darkModeOptions);
                 $enableDarkMode = 0;
@@ -57,10 +64,8 @@ function styleUpper($pageType = 'home', $subtitle = '') {
                 $enableDarkMode = -1;
                 break;
         }
-    }
-
-    if(isset($_GET['dark'])) {
-        switch($_GET['dark']) {
+    } elseif(isset($_COOKIE['Dark-Mode'])) {
+        switch($_COOKIE['Dark-Mode']) {
             case 0:
                 setcookie('Dark-Mode', 0, $darkModeOptions);
                 $enableDarkMode = 0;
@@ -95,22 +100,31 @@ EOD;
 
     $darkMode = '';
     if($enableDarkMode == 1) {
-        $darkMode = '<link rel="stylesheet" href="css/darkmode.css">'."\n";
+        $darkMode = '<link rel="stylesheet" href="/css/darkmode.css">'."\n";
     } elseif($enableDarkMode < 0) {
-        $darkMode = '<style>@import url(\'css/darkmode.css\') (prefers-color-scheme: dark);</style>';
+        $darkMode = '<style>@import url(\'/css/darkmode.css\') (prefers-color-scheme: dark);</style>';
     }
 
     switch ($pageType) {
         case 'home':
             $navbarLink = '<a class="active item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
                           '<a class="item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
-                          '<a class="item" target=_blank href="https://github.com/uup-dump/website/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+                          '<a class="item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
+                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
         break;
 
         case 'downloads':
             $navbarLink = '<a class="item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
                           '<a class="active item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
-                          '<a class="item" target=_blank href="https://github.com/uup-dump/website/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+                          '<a class="item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
+                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+        break;
+
+        case 'newbuild':
+            $navbarLink = '<a class="item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
+                          '<a class="item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
+                          '<a class="active item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
+                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
         break;
 
         default:
@@ -119,8 +133,8 @@ EOD;
     }
 
     $langSelect = '<a class="item" onClick="openLanguageSelector();"><i class="globe icon"></i>'.$s['currentLanguage'].'</a>';
-    $sourceCodeLink = '<a class="item" href="https://github.com/uup-dump"><i class="code icon"></i>'.$s['sourceCode'].'</a>';
-    $discordInvite = '<a class="item" href="https://discord.gg/yVRbtb2"><i class="discord icon"></i>Discord</a>';
+    $sourceCodeLink = '<a class="item" target=_blank href="https://github.com/uup-dump"><i class="code icon"></i>'.$s['sourceCode'].'</a>';
+    $discordInvite = '<a class="item" target=_blank href="https://discord.gg/yVRbtb2"><i class="discord icon"></i>Discord</a>';
 
     $navbarRight = $langSelect.$darkSwitch.$sourceCodeLink.$discordInvite;
     $navbarMobile = $darkSwitch.$sourceCodeLink.$discordInvite.$langSelect;
@@ -144,11 +158,11 @@ EOD;
         <meta property="og:image" content="$baseUrl/img/cover.png">
         <meta property="og:url" content="$fullUrl">
 
-        <link rel="stylesheet" href="css/semantic.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        $darkMode
-        <script src="js/jquery.min.js"></script>
-        <script src="js/semantic.min.js"></script>
+        <link rel="stylesheet" href="/css/semantic.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/semantic.min.js"></script>
 
         <title>$title</title>
 
@@ -164,6 +178,8 @@ EOD;
                 $('.ui.sidebar').sidebar('toggle');
             }
         </script>
+
+        $darkMode
     </head>
     <body>
         <div class="ui sidebar inverted vertical menu">
@@ -175,7 +191,7 @@ EOD;
             <div class="page-header">
                 <div class="ui title container">
                     <h1 title="{$s['uupdump']} v$websiteVersion">
-                        <img src="img/logo.svg" class="logo" alt="">{$s['uupdump']}
+                        <img src="/img/logo.svg" class="logo" alt="">{$s['uupdump']}
                     </h1>
                 </div>
 
@@ -368,6 +384,8 @@ function fancyError($errorCode = 'ERROR', $pageType = 'home', $moreText = 0) {
     }
 
     http_response_code($errorNumber);
+    header('Cache-Control: no-cache');
+
     if($errorNumber == 429) {
         header('Retry-After: 10');
     }

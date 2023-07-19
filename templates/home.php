@@ -16,16 +16,6 @@ limitations under the License.
 */
 if(!isset($templateOk)) die();
 ?>
-<div class="ui negative message">
-    <div class="header">
-        Beware of malicious UUP dump copies
-    </div>
-    <p>
-        Multiple unauthorized copies of the UUP dump website have been sighted. Some of them may offer malicious downloads.</br>
-        <b>Always</b> make sure you are using the official UUP dump website hosted on <b>uupdump.net</b>.
-    </p>
-</div>
-
 <div class="welcome-text">
     <p class="header"><?= $s['uupdump'] ?></p>
     <p class="sub"><i><?= $s['slogan'] ?></i></p>
@@ -42,7 +32,14 @@ if(!isset($templateOk)) die();
 
 <div class="quick-search-buttons">
     <div class="ui tiny compact menu">
-        <a class="item" href="known.php?q=regex:(2(?!262|20)[2-9]|[3-9]\d)\d{3}\.">
+        <a class="item" href="known.php?q=regex:(2((2(?!000|6[2-4][1-9])\d{3})|(5(?!398)\d{3})|[6-9]\d{3}))\.[1-9]|([3-9]\d{4})\.[1-9]">
+            <i class="search icon"></i>
+            <?= $s['channel_canary'] ?>
+        </a>
+    </div>
+
+    <div class="ui tiny compact menu">
+        <a class="item" href="known.php?q=regex:(2[3-4]\d{3})\.[1-9]">
             <i class="search icon"></i>
             <?= $s['channel_dev'] ?>
         </a>
@@ -55,15 +52,11 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
-                <a class="item" href="known.php?q=22623">
-                    22H2 (Moment 2)
+                <a class="item" href="known.php?q=regex:Insider.*226[2-4]\d.*a..64">
+                    22H2 Beta
                 </a>
-
-                <a class="item" href="known.php?q=22622">
-                    22H2 (Moment 1)
-                </a>
-
-                <a class="item" href="known.php?q=22621">
+			
+                <a class="item" href="known.php?q=regex:\(2262\d">
                     22H2
                 </a>
 
@@ -81,6 +74,9 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
+                <a class="item" href="known.php?q=25398">
+                    23H2
+                </a>
                 <a class="item" href="known.php?q=20349">
                     22H2
                 </a>
@@ -140,7 +136,8 @@ if(!isset($templateOk)) die();
             <td><?= $s['latestPublicReleaseSub'] ?></td>
             <td class="center aligned collapsing">
                 <a href="fetchupd.php?arch=amd64&ring=retail&build=<?= $retailLatestBuild ?>"><button class="ui blue button">x64</button></a>
-                <a href="fetchupd.php?arch=arm64&ring=retail&build=<?= $retailLatestBuild ?>"><button class="ui button">arm64</button>
+                <a href="fetchupd.php?arch=arm64&ring=retail&build=<?= $retailLatestBuild ?>"><button class="ui button">arm64</button></a>
+                <a href="fetchupd.php?arch=all&ring=retail&build=<?= $retailLatestBuild ?>"><button class="ui black button">All</button></a>
             </td>
         </tr>
         <tr>
@@ -150,8 +147,9 @@ if(!isset($templateOk)) die();
             </td>
             <td><?= $s['latestRPReleaseSub'] ?></td>
             <td class="center aligned">
-                <a href="fetchupd.php?arch=amd64&ring=rp&build=<?= $rpLatestBuild ?>"><button class="ui blue button">x64</button>
-                <a href="fetchupd.php?arch=arm64&ring=rp&build=<?= $rpLatestBuild ?>"><button class="ui button">arm64</button>
+                <a href="fetchupd.php?arch=amd64&ring=rp&build=<?= $rpLatestBuild ?>"><button class="ui blue button">x64</button></a>
+                <a href="fetchupd.php?arch=arm64&ring=rp&build=<?= $rpLatestBuild ?>"><button class="ui button">arm64</button></a>
+				<a href="fetchupd.php?arch=all&ring=rp&build=<?= $rpLatestBuild ?>"><button class="ui black button">All</button></a>
             </td>
         </tr>
         <tr>
@@ -161,8 +159,9 @@ if(!isset($templateOk)) die();
             </td>
             <td><?= $s['latestBetaReleaseSub'] ?></td>
             <td class="center aligned">
-                <a href="fetchupd.php?arch=amd64&ring=wis&build=<?= $betaLatestBuild ?>"><button class="ui blue button">x64</button>
-                <a href="fetchupd.php?arch=arm64&ring=wis&build=<?= $betaLatestBuild ?>"><button class="ui button">arm64</button>
+                <a href="fetchupd.php?arch=amd64&ring=wis&build=<?= $betaLatestBuild ?>"><button class="ui blue button">x64</button></a>
+                <a href="fetchupd.php?arch=arm64&ring=wis&build=<?= $betaLatestBuild ?>"><button class="ui button">arm64</button></a>
+				<a href="fetchupd.php?arch=all&ring=wis&build=<?= $betaLatestBuild ?>"><button class="ui black button">All</button></a>
             </td>
         </tr>
         <tr>
@@ -172,14 +171,25 @@ if(!isset($templateOk)) die();
             </td>
             <td><?= $s['latestDevReleaseSub'] ?></td>
             <td class="center aligned">
-                <a href="fetchupd.php?arch=amd64&ring=wif&build=latest"><button class="ui blue button">x64</button></a>
-                <a href="fetchupd.php?arch=arm64&ring=wif&build=latest"><button class="ui button">arm64</button></a>
+                <a href="fetchupd.php?arch=amd64&ring=wif&build=<?= $devLatestBuild ?>"><button class="ui blue button">x64</button></a>
+                <a href="fetchupd.php?arch=arm64&ring=wif&build=<?= $devLatestBuild ?>"><button class="ui button">arm64</button></a>
+				<a href="fetchupd.php?arch=all&ring=wif&build=<?= $devLatestBuild ?>"><button class="ui black button">All</button></a>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">
+                <i class="large bomb icon"></i>
+                <b><?= $s['latestCanaryRelease'] ?></b>
+            </td>
+            <td><?= $s['latestCanaryReleaseSub'] ?></td>
+            <td class="center aligned">
+                <a href="fetchupd.php?arch=amd64&ring=canary&build=latest"><button class="ui blue button">x64</button></a>
+                <a href="fetchupd.php?arch=arm64&ring=canary&build=latest"><button class="ui button">arm64</button></a>
+				<a href="fetchupd.php?arch=all&ring=canary&build=latest"><button class="ui black button">All</button></a>
             </td>
         </tr>
     </tbody>
 </table>
-
-<?php if(!$buildsAvailable) return; ?>
 
 <h3 class="ui centered header">
     <div class="content">
@@ -188,35 +198,22 @@ if(!isset($templateOk)) die();
     </div>
 </h3>
 
-<table class="ui striped table">
-    <thead>
-        <tr>
-            <th><?= $s['build'] ?></th>
-            <th><?= $s['arch'] ?></th>
-            <th><?= $s['dateAdded'] ?></th>
-        </tr>
-    </thead>
+<div id="recentBuildsTable">
+    <div class="ui segment" style="height: 40em;">
+        <p></p>
+        <div class="ui active dimmer">
+            <div class="ui loader"></div>
+        </div>
+    </div>
+</div>
 
-    <?php $i = 0; foreach($ids as $val): ?>
-        <?php if(++$i > 15) break; ?>
-
-        <?php $arch = $val['arch']; ?>
-        <?php if($arch == 'amd64') $arch = 'x64'; ?>
-
-        <tr><td>
-            <i class="windows icon"></i>
-            <a href="selectlang.php?id=<?= htmlentities($val['uuid']) ?>">
-                <?= htmlentities($val['title']) ?> <?= htmlentities($val['arch']) ?>
-            </a>
-            </td><td>
-                <?= htmlentities($arch) ?>
-            </td><td>
-
-            <?php if($val['created'] == null): ?>
-                <?= $s['unknown'] ?>
-            <?php else: ?>
-                <?= date("Y-m-d H:i:s T", $val['created']) ?>
-            <?php endif; ?>
-        </td></tr>
-    <?php endforeach; ?>
-</table>
+<script>
+fetch('buildstable.php')
+    .then((response) => response.text())
+    .then((text) => {
+        document.getElementById('recentBuildsTable').innerHTML = text
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+</script>

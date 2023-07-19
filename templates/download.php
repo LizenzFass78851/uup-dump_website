@@ -193,7 +193,7 @@ if(!isset($templateOk)) die();
 				<ul>
 					<li><?= $s['legalCope1'] ?></li>
 					<li><?= $s['legalCope2'] ?></li>
-					<li><?= $s['legalCope3'] ?></li>
+					<li><?= $s['legalCope3v2'] ?></li>
 				</ul>
             </div>
 

@@ -15,22 +15,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-require_once 'api/listid.php';
 require_once 'shared/style.php';
 
-$buildsAvailable = 1;
-$ids = uupListIds(null, 1);
-
-if(isset($ids['error']) || !isset($ids['builds']) || empty($ids['builds'])) {
-    $buildsAvailable = 0;
-    $ids = [];
-} else {
-    $ids = $ids['builds'];
-}
-
-$retailLatestBuild = "22000.856";
-$betaLatestBuild = "22621.382";
-$rpLatestBuild = "22000.856";
+$retailLatestBuild = "22621.1";
+$rpLatestBuild = "22000.1";
+$betaLatestBuild = "22621.1";
+$devLatestBuild = "22621.1";
 
 $templateOk = true;
 

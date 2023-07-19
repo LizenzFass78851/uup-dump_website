@@ -59,6 +59,7 @@ if($search != null) {
 }
 
 $dateSortChecked = $sort ? 'checked' : '';
+
 $templateOk = true;
 
 styleUpper('downloads', $pageTitle);

@@ -67,7 +67,7 @@ if($aria2) {
 
 if(!str_contains($_SERVER['HTTP_USER_AGENT'], 'Mozilla')) {
     header('Location: '.$files[$file]['url']);
-    echo '<h1>Moved to <a href="'.$url.'">here</a>.';
+    echo '<h1>Moved to <a href="'.htmlentities($files[$file]['url']).'">here</a>.';
     die();
 }
 

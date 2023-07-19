@@ -30,7 +30,7 @@ $desiredVE = isset($_POST['virtualEditions']) ? $_POST['virtualEditions'] : arra
 
 require_once 'api/get.php';
 require_once 'api/updateinfo.php';
-require_once 'shared/get.php';
+require_once 'public/get.php';
 require_once 'shared/style.php';
 require_once 'shared/ratelimits.php';
 require_once 'shared/autodl.php';
