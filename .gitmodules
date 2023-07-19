@@ -1,3 +1,6 @@
 [submodule "api"]
 	path = api
-	url = https://github.com/uup-dump-dev/api.git
+	url = https://github.com/LizenzFass78851/uup-dump_api.git
+[submodule "public"]
+	path = public
+	url = https://github.com/LizenzFass78851/uup-dump_website-public.git
