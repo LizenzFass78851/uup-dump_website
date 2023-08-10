@@ -134,7 +134,7 @@ function readableSize($size, $round = 0) {
 
 function isUpdateBlocked($buildNum, $updateTitle) {
     $isCumulative = str_contains($updateTitle, 'Cumulative Update');
-    $isServer = str_contains($updateTitle, 'Server');
+    $isServer = str_contains($updateTitle, 'Server') || str_contains($updateTitle, 'Azure Stack');
 
     return $buildNum > 22557 && $isCumulative && !$isServer;
 }
