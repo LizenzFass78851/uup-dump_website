@@ -16,7 +16,7 @@
             <div class="field">
                 <label><?= $s['arch'] ?></label>
                 <select class="ui dropdown"  name="arch">
-                    <option value="all">All</option>
+                    <option value="all">all</option>
                     <option value="amd64" selected>x64 / amd64</option>
                     <option value="x86">x86</option>
                     <option value="arm64">arm64</option>
