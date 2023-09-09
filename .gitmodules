@@ -4,3 +4,4 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/LizenzFass78851/uup-dump_website-public.git
+	branch = sta
