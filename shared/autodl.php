@@ -68,7 +68,7 @@ class AutoDlConfig {
     private function setUpdateInfo() {
         $info = uupUpdateInfo($this->updateId, ignoreFiles: true);
         $info = @$info['info'];
-    
+
         $this->sku = isset($info['sku']) ? $info['sku'] : 48;
         $this->build = isset($info['build']) ? $info['build'] : 'UNKNOWN';
         $this->arch = isset($info['arch']) ? $info['arch'] : 'UNKNOWN';
@@ -85,15 +85,15 @@ class AutoDlConfig {
         $arch = $this->arch;
 
         $lang = $usePack ? $usePack : 'all';
-    
+
         if(is_array($desiredEditionMixed)) {
             $edition = count($desiredEditionMixed) == 1 ? strtolower($desiredEditionMixed[0]) : 'multi';
         } else {
             $edition = $desiredEditionMixed ? strtolower($desiredEditionMixed) : 'all';
         }
-    
+
         $id = substr($this->updateId, 0, 8);
-        $this->archiveName = "{$build}_{$arch}_{$lang}_{$edition}_{$id}";
+        $this->archiveName = $edition == 'updateonly' ? "{$build}_{$arch}_updates_{$id}" : "{$build}_{$arch}_{$lang}_{$edition}_{$id}";
 
         $this->lang = $lang;
         $this->edition = $edition;
@@ -102,7 +102,7 @@ class AutoDlConfig {
     private function supportsApps() {
         $isBlocked = isUpdateBlocked($this->buildNum, $this->title);
 
-        if($this->buildNum <= 22557 || $isBlocked)
+        if($this->buildNum <= 22557 || $isBlocked || $this->edition == 'updateonly')
             return false;
 
         $genPack = uupGetGenPacks($this->buildNum, $this->arch, $this->updateId);

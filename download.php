@@ -60,6 +60,7 @@ if(is_array($desiredEdition)) {
 
 $desiredEdition = strtolower($desiredEdition);
 $url = "./get.php?id=$updateId&pack=$usePack&edition=$desiredEdition";
+$urlUpd = "./get.php?id=$updateId&pack=0&edition=updateOnly";
 
 if($desiredEdition == 'wubfile' || $desiredEdition == 'updateonly') {
     header("Location: $url");
