@@ -248,6 +248,7 @@ if(!isset($templateOk)) die();
         <?php endif; ?>
 
         <?php if($hasUpdates): ?>
+            <div class="ui divider"></div>
             <h4 class="ui header">
                 <i class="info icon"></i>
                 <div class="content">
@@ -262,10 +263,17 @@ if(!isset($templateOk)) die();
                 </div>
             </h4>
 
-            <a class="ui tiny labeled icon button" href="./get.php?id=<?= $updateId ?>&pack=0&edition=updateOnly">
+            <a class="ui tiny labeled icon button" href="<?= $urlUpd; ?>">
                 <i class="folder open icon"></i>
                 <?= $s['browseUpdatesList'] ?>
             </a>
+
+            <p><form class="ui form" action="<?= $urlUpd; ?>" method="post" id="download-updates">
+                <button class="ui fluid right labeled icon primary button" type="submit" name="autodl" value="1">
+                    <i class="download icon"></i>
+                    <?= $s['aria2Opt4'] ?>
+                </button>
+            </form></p>
 
             <script>
                 document.getElementById('LearnMoreUpdatesLink').style.display = "inline";
