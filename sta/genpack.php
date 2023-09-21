@@ -17,7 +17,18 @@ function get7ZipLocation() {
     return $z7z;
 }
 
-function generatePack($updateId) {
+function deleteBuildInfo($updateId) {
+    $tmp = 'fileinfo/metadata/'.$updateId.'.json';
+    if(file_exists($tmp)) {
+        unlink($tmp);
+    }
+    $tmp = 'fileinfo/full/'.$updateId.'.json';
+    if(file_exists($tmp)) {
+        unlink($tmp);
+    }
+}
+
+function generatePack($updateId, $removedFailed = 0) {
     $z7z = get7ZipLocation();
     $tmp = 'uuptmp';
     if(!file_exists($tmp)) mkdir($tmp);
@@ -31,6 +42,7 @@ function generatePack($updateId) {
     consoleLogger('Generating packs for '.$updateId.'...');
     $files = uupGetFiles($updateId, 0, 0);
     if(isset($files['error'])) {
+        if($removedFailed != 0) deleteBuildInfo($updateId);
         return 0;
     }
 

@@ -1,4 +1,5 @@
 <?php
+$removedFailed = isset($argv[1]) ? intval($argv[1]) : 0;
 
 require_once dirname(__FILE__).'/../api/listid.php';
 require_once dirname(__FILE__).'/main.php';
@@ -11,6 +12,6 @@ if(isset($ids['error'])) {
 }
 
 foreach($ids['builds'] as $val) {
-    generatePack($val['uuid']);
+    generatePack($val['uuid'], $removedFailed);
 }
 ?>
