@@ -23,6 +23,7 @@ $renameScript = isset($_GET['renscript']) ? $_GET['renscript'] : 0;
 $autoDl = isset($_GET['autodl']) ? $_GET['autodl'] : 0;
 $usePack = isset($_GET['pack']) ? $_GET['pack'] : 0;
 $desiredEdition = isset($_GET['edition']) ? $_GET['edition'] : 0;
+$sha1 = isset($_GET['sha1']) ? $_GET['sha1'] : 0;
 
 //post parameters
 $autoDl = isset($_POST['autodl']) ? $_POST['autodl'] : $autoDl;
@@ -82,7 +83,7 @@ if($autoDl && !$aria2) {
 
 $files = uupGetFiles($updateId, $usePack, $desiredEditionMixed, 1);
 
-if($aria2) {
+if($aria2 && !$sha1) {
     header('Content-Type: text/plain');
 
     if(isset($files['error'])) {
@@ -146,6 +147,16 @@ $files = $files['files'];
 $filesKeys = array_keys($files);
 
 $request = explode('?', $_SERVER['REQUEST_URI'], 2);
+
+if($sha1) {
+    $id = substr($updateId, 0, 8);
+    header('Content-Type: text/plain');
+    header('Content-Disposition: attachment; filename="checksums_'.$id.'.sha1"');
+    foreach($filesKeys as $val) {
+        echo $files[$val]['sha1'].' *'.$val."\n";
+    }
+    die();
+}
 
 if($renameScript) {
     if($renameScript == 2) {
