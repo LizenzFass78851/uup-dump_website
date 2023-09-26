@@ -46,6 +46,11 @@ function generatePack($updateId, $removedFailed = 0) {
         return 0;
     }
 
+    $updateTitle = $files['updateName'];
+    if(preg_match('/Corpnet Required/i', $updateTitle)) {
+        return 2;
+    }
+
     $isku = $files['sku'];
     $ibld = $files['build'];
     $files = $files['files'];
