@@ -80,8 +80,10 @@ $uSku = $files['sku'];
 $build = explode('.', $files['build']);
 $build = @$build[0];
 
+$EditionIsApp = isAppEdition($desiredEditionMixed);
+
 $disableVE = 0;
-if($desiredEdition == 'app' || !areVirtualEditonsSupported($build, $uSku)) {
+if($EditionIsApp || !areVirtualEditonsSupported($build, $uSku)) {
     $disableVE = 1;
 }
 
@@ -153,7 +155,7 @@ if(preg_grep('/^.*ProfessionalN_.*\.esd/i', $filesKeys)) {
     $virtualEditions['EnterpriseN'] = 'Enterprise N';
 }
 
-$dlOnly = ($desiredEdition == 'app' || $uSku == 189 || $uSku == 135);
+$dlOnly = ($EditionIsApp || $uSku == 189 || $uSku == 135);
 
 $templateOk = true;
 

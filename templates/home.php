@@ -52,12 +52,20 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
-                <a class="item" href="known.php?q=regex:Insider.*226[2-4]\d.*a..64">
-                    22H2 Beta
+                <a class="item" href="known.php?q=regex:\(2263\d">
+                    23H2
+                </a>
+			
+                <a class="item" href="known.php?q=regex:Insider.*2263\d.*a..64">
+                    23H2 Beta
                 </a>
 			
                 <a class="item" href="known.php?q=regex:\(2262\d">
                     22H2
+                </a>
+
+                <a class="item" href="known.php?q=regex:Insider.*2262\d.*a..64">
+                    22H2 Beta
                 </a>
 
                 <a class="item" href="known.php?q=22000">
