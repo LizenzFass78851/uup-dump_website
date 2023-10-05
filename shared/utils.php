@@ -144,6 +144,20 @@ function areVirtualEditonsSupported($build, $sku) {
     return $build >= 17107 && !$isServer;
 }
 
+function isAppEdition($desiredEdition) {
+    $EditionIsApp = 0;
+    if(!is_array($desiredEdition)) {
+        $edition = strtoupper($desiredEdition);
+        if($edition == 'APP' || $edition == 'APP_MOMENT') $EditionIsApp = 1;
+    } else {
+        foreach($desiredEdition as $edition) {
+            $edition = strtoupper($edition);
+            if($edition == 'APP' || $edition == 'APP_MOMENT') $EditionIsApp = 1;
+        }
+    }
+    return $EditionIsApp;
+}
+
 function getDefaultLanguage() {
     $config = uupDumpApiGetConfig();
     return isset($config['test_lang']) ? $config['test_lang'] : 'en-us';

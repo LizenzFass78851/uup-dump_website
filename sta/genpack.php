@@ -92,7 +92,7 @@ function generatePack($updateId, $removedFailed = 0) {
         if($ibld > 22557) {
             $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $dataFiles, PREG_GREP_INVERT);
             $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $files);
-		}
+        }
         unset($out);
 
         exec("\"$z7z\" x -o\"$tmp\" \"$loc\" -y", $out, $errCode);
@@ -153,7 +153,7 @@ function generatePack($updateId, $removedFailed = 0) {
         if($ibld > 22557) {
             $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $dataFiles, PREG_GREP_INVERT);
             $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $filesKeys);
-		}
+        }
 
         foreach($dataFiles as $val) {
             if(!$files[$val]['sha256']) {
@@ -275,6 +275,19 @@ function generatePack($updateId, $removedFailed = 0) {
         unset($file, $xml, $name, $newName, $lang, $edition);
     }
 
+    if(isset($appsToRead) && $ibld > 22620) foreach($appsToRead as $val) {
+        $file = $tmp.'/'.$val;
+        $xml = simplexml_load_file($file);
+
+        foreach($xml->Features->Feature as $ftr) {
+            if(@count($ftr->Dependencies)) foreach($ftr->Dependencies->Feature as $dep) {
+                if(isset($dep['Group']) && ($dep['Group'] == 'PreinstalledApps')) $optAppx[] = strtolower($dep['FeatureID']);
+            }
+        }
+
+        unset($file, $xml);
+    }
+
     $appxOpt = array_flip($optAppx);
     $paks = array();
     if(isset($appsToRead)) foreach($appsToRead as $val) {
@@ -303,7 +316,7 @@ function generatePack($updateId, $removedFailed = 0) {
                     $packages[$lang][$edition][] = $paks[$chk][0];
                 }
                 continue;
-			}
+            }
             if(!isset($appxOpt[strtolower($ftr['FeatureID'])])) continue;
             foreach($ftr->Packages->Package as $pkg) {
                 $chk = (string)$pkg['ID'];

@@ -102,8 +102,11 @@ $editionsNum = count($editions);
 
 $recommend = !array_diff($recommendedEditions, array_keys($editions));
 
-if($editionsNum == 1 && isset($editions['APP'])) 
-    $disableVE = 1;
+if($editionsNum == 1) {
+    if(isset($editions['APP']) || isset($editions['APP_MOMENT'])) $disableVE = 1;
+} else {
+    if(isset($editions['APP']) && isset($editions['APP_MOMENT'])) $disableVE = 1;
+}
 
 $templateOk = true;
 
