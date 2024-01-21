@@ -26,7 +26,7 @@
             <div class="field">
                 <label><?= $s['ring'] ?></label>
                 <select class="ui dropdown" name="ring">
-                    <option value="msit"><?= $s['channel_msit'] ?></option>
+                    <option value="msit">MSIT</option>
                     <option value="canary" selected><?= $s['channel_canary'] ?></option>
                     <option value="wif"><?= $s['channel_dev'] ?></option>
                     <option value="wis"><?= $s['channel_beta'] ?></option>
@@ -37,24 +37,24 @@
 
             <div class="field">
                 <label><?= $s['build'] ?></label>
-                <input type="text" value="22621.1" name="build">
+                <input type="text" value="22631.1" name="build">
             </div>
 
             <div class="field">
                 <label><?= $s['edition'] ?></label>
                 <select class="ui dropdown" name="sku">
-                    <option value="101">Home</option>
-                    <option value="48" selected>Pro</option>
-                    <option value="121">Education</option>
-                    <option value="4">Enterprise</option>
-                    <option value="72">Enterprise Evaluation</option>
-                    <option value="125">Enterprise LTSC</option>
-                    <option value="129">Enterprise LTSC Evaluation</option>
-                    <option value="119">Team</option>
-                    <option value="7">Server Standard</option>
-                    <option value="8">Server Datacenter</option>
-                    <option value="406">Azure Stack HCI</option>
-                    <option value="407">Server Datacenter Azure Edition</option>
+                    <option value="101"><?= $s['edition_CORE'] ?></option>
+                    <option value="48"><?= $s['edition_PROFESSIONAL'] ?></option>
+                    <option value="121"><?= $s['edition_EDUCATION'] ?></option>
+                    <option value="4" selected><?= $s['edition_ENTERPRISE'] ?></option>
+                    <option value="72"><?= $s['edition_ENTERPRISEEVAL'] ?></option>
+                    <option value="125"><?= $s['edition_ENTERPRISES'] ?></option>
+                    <option value="129"><?= $s['edition_ENTERPRISESEVAL'] ?></option>
+                    <option value="119"><?= $s['edition_PPIPRO'] ?></option>
+                    <option value="7"><?= $s['edition_SERVERSTANDARD'] ?></option>
+                    <option value="8"><?= $s['edition_SERVERDATACENTER'] ?></option>
+                    <option value="406"><?= $s['edition_SERVERAZURESTACKHCICOR'] ?></option>
+                    <option value="407"><?= $s['edition_SERVERTURBINE'] ?></option>
                 </select>
             </div>
 

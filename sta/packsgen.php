@@ -12,6 +12,7 @@ if(isset($ids['error'])) {
 }
 
 foreach($ids['builds'] as $val) {
+    if(uupApiPacksExist($val['uuid'])) continue;
+
     generatePack($val['uuid'], $removedFailed);
 }
-?>

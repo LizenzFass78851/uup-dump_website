@@ -110,21 +110,21 @@ EOD;
             $navbarLink = '<a class="active item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
                           '<a class="item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
                           '<a class="item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
-                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+                          '<a class="item" target=_blank href="https://git.uupdump.net/uup-dump/containment-zone/src/branch/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
         break;
 
         case 'downloads':
             $navbarLink = '<a class="item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
                           '<a class="active item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
                           '<a class="item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
-                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+                          '<a class="item" target=_blank href="https://git.uupdump.net/uup-dump/containment-zone/src/branch/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
         break;
 
         case 'newbuild':
             $navbarLink = '<a class="item" href="./"><i class="home icon"></i>'.$s['home'].'</a>'.
                           '<a class="item" href="known.php"><i class="download icon"></i>'.$s['downloads'].'</a>'.
                           '<a class="active item" href="newbuild.php"><i class="plus circle icon"></i>'.$s['newBuild'].'</a>'.
-                          '<a class="item" target=_blank href="https://github.com/uup-dump-dev/website-public/blob/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
+                          '<a class="item" target=_blank href="https://git.uupdump.net/uup-dump/containment-zone/src/branch/master/FAQ.md"><i class="question circle icon"></i>'.$s['faq'].'</a>';
         break;
 
         default:
@@ -133,7 +133,7 @@ EOD;
     }
 
     $langSelect = '<a class="item" onClick="openLanguageSelector();"><i class="globe icon"></i>'.$s['currentLanguage'].'</a>';
-    $sourceCodeLink = '<a class="item" target=_blank href="https://github.com/uup-dump"><i class="code icon"></i>'.$s['sourceCode'].'</a>';
+    $sourceCodeLink = '<a class="item" target=_blank href="https://git.uupdump.net/uup-dump"><i class="code icon"></i>'.$s['sourceCode'].'</a>';
     $discordInvite = '<a class="item" target=_blank href="https://discord.gg/yVRbtb2"><i class="discord icon"></i>Discord</a>';
 
     $navbarRight = $langSelect.$darkSwitch.$sourceCodeLink.$discordInvite;
@@ -372,6 +372,9 @@ function fancyError($errorCode = 'ERROR', $pageType = 'home', $moreText = 0) {
             $errorNumber = 400;
             $errorFancy = $s['error_INVALID_PAGE'];
             break;
+        case 'WU_REQUEST_FAILED':
+            $errorFancy = $s['error_WU_REQUEST_FAILED'];
+            break;
         default:
             $errorFancy = "<i>{$s['errorNoMessage']}</i><br><br>$errorCode";
             break;
@@ -417,12 +420,9 @@ function styleCluelessUserArm64Warn() {
     global $s;
 
     echo <<<INFO
-<div class="ui negative icon message">
-    <i class="exclamation triangle icon"></i>
-    <div class="content">
-        <div class="header">{$s['arm64Warning2022h']}</div>
-        {$s['arm64Warning2022b']}
-    </div>
+<div class="ui negative small icon message">
+    <i class="mobile alternate icon"></i>
+        <div class="header">{$s['arm64Warning2023']}</div>
 </div>
 
 INFO;

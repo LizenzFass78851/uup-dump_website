@@ -241,14 +241,13 @@ if(!isset($templateOk)) die();
         <h4 class="ui red header">
             <i class="exclamation triangle icon"></i>
             <div class="content">
-                <?= $s['win1122h2OrLater'] ?>
-                <div class="sub header"><?= $s['requiresWindows102004'] ?></div>
+                <?= $s['win1122h2OrLaterv2'] ?>
+                <div class="sub header"><?= $s['requiresWindows102004v2'] ?></div>
             </div>
         </h4>
         <?php endif; ?>
 
         <?php if($hasUpdates): ?>
-            <div class="ui divider"></div>
             <h4 class="ui header">
                 <i class="info icon"></i>
                 <div class="content">
@@ -263,17 +262,18 @@ if(!isset($templateOk)) die();
                 </div>
             </h4>
 
-            <a class="ui tiny labeled icon button" href="<?= $urlUpd; ?>">
-                <i class="folder open icon"></i>
-                <?= $s['browseUpdatesList'] ?>
-            </a>
-
-            <p><form class="ui form" action="<?= $urlUpd; ?>" method="post" id="download-updates">
-                <button class="ui fluid right labeled icon primary button" type="submit" name="autodl" value="1">
-                    <i class="download icon"></i>
-                    <?= $s['aria2Opt4'] ?>
-                </button>
-            </form></p>
+            <form class="ui form" action="<?= $urlUpd; ?>" method="post" id="download-updates">
+                <div class="field">
+                    <a class="ui tiny labeled icon button" href="<?= $urlUpd; ?>">
+                        <i class="folder open icon"></i>
+                        <?= $s['browseUpdatesList'] ?>
+                    </a>
+                    <button class="ui tiny right labeled icon button" type="submit" name="autodl" value="1">
+                        <i class="download icon"></i>
+                        <?= $s['aria2Opt4'] ?>
+                    </button>
+                </div>
+            </form>
 
             <script>
                 document.getElementById('LearnMoreUpdatesLink').style.display = "inline";
@@ -305,7 +305,7 @@ if(!isset($templateOk)) die();
         <br>
         <?php printf($s['aria2NoticeText4'], '<a href="https://forums.mydigitallife.net/members/abbodi1406.204274/">abbodi1406</a>'); ?>
         <br>
-        <?php printf($s['aria2NoticeText5'], '<a href="https://github.com/uup-dump/converter">https://github.com/uup-dump/converter</a>'); ?>
+        <?php printf($s['aria2NoticeText5'], '<a href="https://git.uupdump.net/uup-dump/converter">https://git.uupdump.net/uup-dump/converter</a>'); ?>
     </p>
 </div>
 

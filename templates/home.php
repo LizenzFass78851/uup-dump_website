@@ -177,7 +177,7 @@ if(!isset($templateOk)) die();
         </tr>
         <tr>
             <td class="collapsing">
-                <i class="large bomb icon"></i>
+                <i class="large flask icon"></i>
                 <b><?= $s['latestCanaryRelease'] ?></b>
             </td>
             <td><?= $s['latestCanaryReleaseSub'] ?></td>
