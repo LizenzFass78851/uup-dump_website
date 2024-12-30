@@ -17,10 +17,10 @@ limitations under the License.
 
 require_once 'shared/style.php';
 
-$retailLatestBuild = "22631.1";
-$rpLatestBuild = "22000.1";
+$retailLatestBuild = "26100.1";
+$rpLatestBuild = "26100.1";
 $betaLatestBuild = "22631.1";
-$devLatestBuild = "22631.1";
+$devLatestBuild = "26100.1";
 
 $templateOk = true;
 

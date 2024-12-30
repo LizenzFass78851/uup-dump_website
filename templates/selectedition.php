@@ -113,10 +113,18 @@ if(!isset($templateOk)) die();
                         <td>Windows Enterprise multi-session / Virtual Desktops</td>
                         <td>Windows Pro</td>
                     </tr>
+                    <?php if($buildNum >= 18277): ?>
                     <tr>
                         <td>Windows IoT Enterprise</td>
                         <td>Windows Pro</td>
                     </tr>
+                    <?php endif; ?>
+                    <?php if($buildNum >= 25982): ?>
+                    <tr>
+                        <td>Windows IoT Enterprise Subscription</td>
+                        <td>Windows Pro</td>
+                    </tr>
+                    <?php endif; ?>
                     <tr>
                         <td>Windows Pro for Workstations N</td>
                         <td>Windows Pro N</td>

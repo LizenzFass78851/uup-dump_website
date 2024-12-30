@@ -88,10 +88,10 @@ function generatePack($updateId, $removedFailed = 0) {
 
         $files = preg_grep('/Path = /', $out);
         $files = preg_replace('/Path = /', '', $files);
-        $dataFiles = preg_grep('/DesktopTargetCompDB_.*_.*\.|ServerTargetCompDB_.*_.*\.|ModernPCTargetCompDB_.*\.|HolographicTargetCompDB_.*\./i', $files);
+        $dataFiles = preg_grep('/DesktopTargetCompDB_.*_.*\.|ServerTargetCompDB_.*_.*\.|TargetCompDB_WNC_.*_.*_.*\.|ModernPCTargetCompDB_.*\.|HolographicTargetCompDB_.*\./i', $files);
         if($ibld > 22557) {
-            $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $dataFiles, PREG_GREP_INVERT);
-            $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $files);
+            $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|TargetCompDB_WNC_.*_App_.*/i', $dataFiles, PREG_GREP_INVERT);
+            $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|TargetCompDB_WNC_.*_App_.*/i', $files);
         }
         unset($out);
 
@@ -112,7 +112,7 @@ function generatePack($updateId, $removedFailed = 0) {
                     throwError('7ZIP_ERROR');
                 }
 
-                $temp = preg_grep('/^-.*DesktopTargetCompDB_.*_.*\.|^-.*ServerTargetCompDB_.*_.*\.|^-.*ModernPCTargetCompDB_.*\.|^-.*HolographicTargetCompDB_.*\./i', $out);
+                $temp = preg_grep('/^-.*DesktopTargetCompDB_.*_.*\.|^-.*ServerTargetCompDB_.*_.*\.|^-.*TargetCompDB_WNC_.*_.*_.*\.|^-.*ModernPCTargetCompDB_.*\.|^-.*HolographicTargetCompDB_.*\./i', $out);
                 sort($temp);
                 $temp = preg_replace('/^- /', '', $temp[0]);
 
@@ -134,7 +134,7 @@ function generatePack($updateId, $removedFailed = 0) {
                     throwError('7ZIP_ERROR');
                 }
 
-                $temp = preg_grep('/^-.*DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $out);
+                $temp = preg_grep('/^-.*DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|^-.*TargetCompDB_WNC_.*_App_.*/i', $out);
                 sort($temp);
                 $temp = preg_replace('/^- /', '', $temp[0]);
 
@@ -149,10 +149,10 @@ function generatePack($updateId, $removedFailed = 0) {
         unlink($loc);
         unset($loc, $checkFile, $checkEd, $dataFiles, $dataApps);
     } else {
-        $dataFiles = preg_grep('/DesktopTargetCompDB_.*_.*\.|ServerTargetCompDB_.*_.*\.|ModernPCTargetCompDB\.|HolographicTargetCompDB\./i', $filesKeys);
+        $dataFiles = preg_grep('/DesktopTargetCompDB_.*_.*\.|ServerTargetCompDB_.*_.*\.|TargetCompDB_WNC_.*_.*_.*\.|ModernPCTargetCompDB\.|HolographicTargetCompDB\./i', $filesKeys);
         if($ibld > 22557) {
-            $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $dataFiles, PREG_GREP_INVERT);
-            $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $filesKeys);
+            $dataFiles = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|TargetCompDB_WNC_.*_App_.*/i', $dataFiles, PREG_GREP_INVERT);
+            $dataApps = preg_grep('/DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|TargetCompDB_WNC_.*_App_.*/i', $filesKeys);
         }
 
         foreach($dataFiles as $val) {
@@ -177,7 +177,7 @@ function generatePack($updateId, $removedFailed = 0) {
                     throwError('7ZIP_ERROR');
                 }
 
-                $temp = preg_grep('/^-.*DesktopTargetCompDB_.*_.*\.|^-.*ServerTargetCompDB_.*_.*\.|^-.*ModernPCTargetCompDB\.|^-.*HolographicTargetCompDB\./i', $out);
+                $temp = preg_grep('/^-.*DesktopTargetCompDB_.*_.*\.|^-.*ServerTargetCompDB_.*_.*\.|^-.*TargetCompDB_WNC_.*_.*_.*\.|^-.*ModernPCTargetCompDB\.|^-.*HolographicTargetCompDB\./i', $out);
                 sort($temp);
                 $temp = preg_replace('/^- /', '', $temp[0]);
 
@@ -211,7 +211,7 @@ function generatePack($updateId, $removedFailed = 0) {
                     throwError('7ZIP_ERROR');
                 }
 
-                $temp = preg_grep('/^-.*DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\./i', $out);
+                $temp = preg_grep('/^-.*DesktopTargetCompDB_App_.*\.|ServerTargetCompDB_App_.*\.|^-.*TargetCompDB_WNC_.*_App_.*/i', $out);
                 sort($temp);
                 $temp = preg_replace('/^- /', '', $temp[0]);
 
@@ -234,8 +234,8 @@ function generatePack($updateId, $removedFailed = 0) {
         $file = $tmp.'/'.$val;
         $xml = simplexml_load_file($file);
 
-        $lang = preg_replace('/.*DesktopTargetCompDB_.*_|.*ServerTargetCompDB_.*_/', '', $filNam);
-        $edition = preg_replace('/.*DesktopTargetCompDB_|.*ServerTargetCompDB_|_'.$lang.'/', '', $filNam);
+        $lang = preg_replace('/.*DesktopTargetCompDB_.*_|.*ServerTargetCompDB_.*_|.*TargetCompDB_WNC_.*_.*_/', '', $filNam);
+        $edition = preg_replace('/.*DesktopTargetCompDB_|.*ServerTargetCompDB_|.*TargetCompDB_WNC_(.*?)_|_'.$lang.'/', '', $filNam);
         if($isku == 189) {
             $lang = 'en-us';
             $edition = 'Lite';
@@ -268,6 +268,8 @@ function generatePack($updateId, $removedFailed = 0) {
             }
         }
 
+        if(!isset($packages[$lang][$edition])) continue;
+
         $packages[$lang][$edition] = array_unique($packages[$lang][$edition]);
         sort($packages[$lang][$edition]);
 
@@ -295,8 +297,8 @@ function generatePack($updateId, $removedFailed = 0) {
         $file = $tmp.'/'.$val;
         $xml = simplexml_load_file($file);
 
-        $lang = preg_replace('/.*DesktopTargetCompDB_.*_|.*ServerTargetCompDB_.*_/', '', $filNam);
-        $edition = preg_replace('/.*DesktopTargetCompDB_|.*ServerTargetCompDB_|_'.$lang.'/', '', $filNam);
+        $lang = preg_replace('/.*DesktopTargetCompDB_.*_|.*ServerTargetCompDB_.*_|.*TargetCompDB_WNC_.*_.*_/', '', $filNam);
+        $edition = preg_replace('/.*DesktopTargetCompDB_|.*ServerTargetCompDB_|.*TargetCompDB_WNC_(.*?)_|_'.$lang.'/', '', $filNam);
 
         $lang = strtolower($lang);
         $edition = strtoupper($edition);
@@ -323,6 +325,8 @@ function generatePack($updateId, $removedFailed = 0) {
                 $packages[$lang][$edition][] = $paks[$chk][0];
             }
         }
+
+        if(!isset($packages[$lang][$edition])) continue;
 
         $packages[$lang][$edition] = array_unique($packages[$lang][$edition]);
         sort($packages[$lang][$edition]);

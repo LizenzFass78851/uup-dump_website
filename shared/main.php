@@ -1,7 +1,7 @@
 <?php
 // Website information
-$websiteVersion = '1.7.2-r2';
-$requiredApi = '1.40.2';
+$websiteVersion = '1.8.1';
+$requiredApi = '1.44.0';
 
 require_once dirname(__FILE__).'/../api/shared/main.php';
 require_once dirname(__FILE__).'/utils.php';

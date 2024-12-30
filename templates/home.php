@@ -32,14 +32,14 @@ if(!isset($templateOk)) die();
 
 <div class="quick-search-buttons">
     <div class="ui tiny compact menu">
-        <a class="item" href="known.php?q=regex:(2((2(?!000|6[2-4][1-9])\d{3})|(5(?!398)\d{3})|[6-9]\d{3}))\.[1-9]|([3-9]\d{4})\.[1-9]">
+        <a class="item" href="known.php?q=regex:Insider.*(2((2(?!000|6[2-4][1-9])\d{3})|(5(?!398)\d{3})|[6-9]\d{3}))\.[1-9]|([3-9]\d{4})\.[1-9]">
             <i class="search icon"></i>
             <?= $s['channel_canary'] ?>
         </a>
     </div>
 
     <div class="ui tiny compact menu">
-        <a class="item" href="known.php?q=regex:(2[3-4]\d{3})\.[1-9]">
+        <a class="item" href="known.php?q=regex:Insider.*(2[3-4]\d{3}|260[5-9]\d|261\d{2})\.[1-9]">
             <i class="search icon"></i>
             <?= $s['channel_dev'] ?>
         </a>
@@ -52,16 +52,22 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
-                <a class="item" href="known.php?q=regex:Insider.*2263\d.*a..64">
+                <a class="item" href="known.php?q=regex:Insider.*26120">
+                    24H2 Dev
+                </a>
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26100">
+                    24H2
+                </a>
+                <a class="item" href="known.php?q=regex:Insider.*2263\d">
                     23H2 Beta
                 </a>
-                <a class="item" href="known.php?q=regex:\(2263\d">
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider).)*22631">
                     23H2
                 </a>
-                <a class="item" href="known.php?q=regex:\(2262\d">
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider).)*22621">
                     22H2
                 </a>
-                <a class="item" href="known.php?q=22000">
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider).)*22000">
                     21H2
                 </a>
             </div>
@@ -75,6 +81,9 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
+                <a class="item" href="known.php?q=regex:(Server|HCI).*26100">
+                    24H2
+                </a>
                 <a class="item" href="known.php?q=25398">
                     23H2
                 </a>
@@ -101,7 +110,7 @@ if(!isset($templateOk)) die();
                 <a class="item" href="known.php?q=19044">
                     21H2
                 </a>
-                <a class="item" href="known.php?q=17763">
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider).)*17763">
                     1809
                 </a>
             </div>

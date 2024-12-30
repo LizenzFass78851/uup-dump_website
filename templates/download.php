@@ -43,7 +43,12 @@ if(!isset($templateOk)) die();
             <li>Windows Education</li>
             <li>Windows Enterprise</li>
             <li>Windows Enterprise multi-session / Virtual Desktops</li>
+            <?php if($build >= 18277): ?>
             <li>Windows IoT Enterprise</li>
+            <?php endif; ?>
+            <?php if($build >= 25982): ?>
+            <li>Windows IoT Enterprise Subscription</li>
+            <?php endif; ?>
         </ul>
         <p><b>Windows Pro N</b></p>
         <ul>

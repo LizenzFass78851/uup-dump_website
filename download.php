@@ -120,7 +120,7 @@ if($usePack && $desiredEdition) {
     } else {
         $fancyNames = [];
         foreach($desiredEditionMixed as $edition) {
-            $fancyNames[] = $editions[strtoupper($edition)];
+            $fancyNames[] = isset($editions[strtoupper($edition)]) ? $editions[strtoupper($edition)] : $edition;
         }
 
         $selectedEditionName = implode(', ', $fancyNames);
@@ -143,9 +143,12 @@ if(preg_grep('/^.*Professional_.*\.esd/i', $filesKeys)) {
     $virtualEditions['Enterprise'] = 'Enterprise';
     $virtualEditions['ServerRdsh'] = 'Enterprise multi-session / Virtual Desktops';
 
-    if($build >= 18277) {
+    if($build >= 18277)
         $virtualEditions['IoTEnterprise'] = 'IoT Enterprise';
-    }
+
+    if($build >= 25982)
+        $virtualEditions['IoTEnterpriseK'] = 'IoT Enterprise Subscription';
+
 }
 
 if(preg_grep('/^.*ProfessionalN_.*\.esd/i', $filesKeys)) {

@@ -22,18 +22,31 @@ $build = isset($_GET['build']) ? $_GET['build'] : 16251;
 $minor = isset($_GET['minor']) ? $_GET['minor'] : 0;
 $sku = isset($_GET['sku']) ? $_GET['sku'] : 48;
 $type = isset($_GET['type']) ? $_GET['type'] : 'Production';
+$branch = isset($_GET['branch']) ? $_GET['branch'] : 'auto';
+$flags = isset($_GET['flags']) ? $_GET['flags'] : [];
 
 require_once 'api/fetchupd.php';
 require_once 'shared/style.php';
 require_once 'shared/ratelimits.php';
 
-$resource = hash('sha1', strtolower("fetch-$arch-$ring-$flight-$build-$minor-$sku-$type"));
+$resource = hash('sha1', strtolower("fetch-$arch-$ring-$branch-$build-$minor-$sku-$type"));
 if(checkIfUserIsRateLimited($resource)) {
     fancyError('RATE_LIMITED', 'downloads');
     die();
 }
 
-$fetchUpd = uupFetchUpd($arch, $ring, $flight, $build, $minor, $sku, $type, 1);
+// $fetchUpd = uupFetchUpd($arch, $ring, $flight, $build, $minor, $sku, $type, 1);
+$params = [
+    'arch' => $arch,
+    'ring' => $ring,
+    'branch' => $branch,
+    'build' => $build,
+    'minor' => $minor,
+    'sku' => $sku,
+    'type' => $type,
+    'flags' => $flags,
+];
+$fetchUpd = uupFetchUpd2($params, 1);
 if(isset($fetchUpd['error'])) {
     fancyError($fetchUpd['error'], 'downloads');
     die();
