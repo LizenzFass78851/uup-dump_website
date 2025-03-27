@@ -135,7 +135,7 @@ function readableSize($size, $round = 0) {
 function isUpdateBlocked($buildNum, $updateTitle) {
     $isCumulative = str_contains($updateTitle, 'Cumulative Update');
     $isServer = str_contains($updateTitle, 'Server') || str_contains($updateTitle, 'Azure Stack');
-    $isWNC = str_contains($updateTitle, 'Cloud PC');
+    $isWNC = str_contains($updateTitle, 'Cloud PC') || str_contains($updateTitle, 'Windows CPC OS');
 
     return $buildNum > 22557 && $isCumulative && !$isServer && !$isWNC;
 }
