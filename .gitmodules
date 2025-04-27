@@ -6,3 +6,7 @@
 	path = public
 	url = https://github.com/LizenzFass78851/uup-dump_website-public.git
 	branch = sta
+[submodule "json-api"]
+	path = json-api
+	url = https://github.com/LizenzFass78851/uup-dump_json-api.git
+	branch = sta
