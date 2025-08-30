@@ -55,6 +55,9 @@ if(!isset($templateOk)) die();
                 <a class="item" href="known.php?q=regex:Insider.*26200">
                     25H2 Dev
                 </a>
+                <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26200">
+                    25H2
+                </a>
                 <a class="item" href="known.php?q=regex:Insider.*2612\d">
                     24H2 Beta
                 </a>
