@@ -52,7 +52,7 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
-                <a class="item" href="known.php?q=regex:Insider.*26200">
+                <a class="item" href="known.php?q=regex:Insider.*262\d0">
                     25H2 Dev
                 </a>
                 <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26200">
