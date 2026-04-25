@@ -39,7 +39,7 @@ if(!isset($templateOk)) die();
     </div>
 
     <div class="ui tiny compact menu">
-        <a class="item" href="known.php?q=regex:Insider.*(2[3-4]\d{3}|260[5-9]\d|26[1-2]\d{2})\.[1-9]">
+        <a class="item" href="known.php?q=regex:^(?i)(?!.*(?:Server|HCI|prerelease)).*Insider.*(261\d{2}|26[2-3]\d{2})\.[1-9]">
             <i class="search icon"></i>
             <?= $s['channel_dev'] ?>
         </a>
