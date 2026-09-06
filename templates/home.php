@@ -34,7 +34,7 @@ if(!isset($templateOk)) die();
     <div class="ui tiny compact menu">
         <a class="item" href="known.php?q=regex:Insider.*(2((2(?!000|6[2-4][1-9])\d{3})|(5(?!398)\d{3})|[6-9]\d{3}))\.[1-9]|([3-9]\d{4})\.[1-9]">
             <i class="search icon"></i>
-            <?= $s['channel_canary'] ?>
+            <?= $s['release_future'] ?>
         </a>
     </div>
 
@@ -180,9 +180,9 @@ if(!isset($templateOk)) die();
         <tr>
             <td class="collapsing">
                 <i class="large bomb icon"></i>
-                <b><?= $s['latestDevRelease'] ?></b>
+                <b><?= $s['latestExperimentalRelease'] ?></b>
             </td>
-            <td><?= $s['latestDevReleaseSub'] ?></td>
+            <td><?= $s['latestExperimentalReleaseSub'] ?></td>
             <td class="center aligned">
                 <a href="fetchupd.php?arch=amd64&ring=wif&build=<?= $devLatestBuild ?>"><button class="ui blue button">x64</button></a>
                 <a href="fetchupd.php?arch=arm64&ring=wif&build=<?= $devLatestBuild ?>"><button class="ui button">arm64</button></a>
@@ -192,9 +192,9 @@ if(!isset($templateOk)) die();
         <tr>
             <td class="collapsing">
                 <i class="large flask icon"></i>
-                <b><?= $s['latestCanaryRelease'] ?></b>
+                <b><?= $s['latestFuturePlatformsRelease'] ?></b>
             </td>
-            <td><?= $s['latestCanaryReleaseSub'] ?></td>
+            <td><?= $s['latestFuturePlatformsReleaseSub'] ?></td>
             <td class="center aligned">
                 <a href="fetchupd.php?arch=amd64&ring=canary&build=latest"><button class="ui blue button">x64</button></a>
                 <a href="fetchupd.php?arch=arm64&ring=canary&build=latest"><button class="ui button">arm64</button></a>

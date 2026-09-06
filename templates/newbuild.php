@@ -27,8 +27,8 @@
                 <label><?= $s['ring'] ?></label>
                 <select class="ui dropdown" name="ring">
                     <option value="msit">MSIT</option>
-                    <option value="canary" selected><?= $s['channel_canary'] ?></option>
-                    <option value="wif"><?= $s['channel_dev'] ?></option>
+                    <option value="canary" selected><?= $s['release_future'] ?></option>
+                    <option value="wif"><?= $s['channel_experimental'] ?></option>
                     <option value="wis"><?= $s['channel_beta'] ?></option>
                     <option value="rp"><?= $s['channel_releasepreview'] ?></option>
                     <option value="retail"><?= $s['channel_retail'] ?></option>

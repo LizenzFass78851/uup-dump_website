@@ -111,11 +111,11 @@ if(in_array(strtolower($s['code']), array_keys($langs))) {
 
 //Set fancy name for channel and flight of build
 if($ring == 'CANARY' && $flight == 'Active') {
-    $fancyChannelName = $s['channel_canary'];
+    $fancyChannelName = $s['release_future'];
 } elseif($ring == 'WIF' && $flight == 'Skip') {
     $fancyChannelName = $s['channel_skipAhead'];
 } elseif($ring == 'WIF' && $flight == 'Active') {
-    $fancyChannelName = $s['channel_dev'];
+    $fancyChannelName = $s['channel_experimental'];
 } elseif($ring == 'WIS' && $flight == 'Active') {
     $fancyChannelName = $s['channel_beta'];
 } elseif($ring == 'RP' && $flight == 'Current') {
@@ -138,7 +138,7 @@ $langsAvailable = count($langs) > 0;
 $packsAvailable = uupApiPacksExist($updateId);
 
 $noLangsIcon = 'times circle outline';
-$noLangsCause = $s['updateIsBlocked'];
+$noLangsCause = $s['updateIsBlockedv2'];
 $generatePacksButton = false;
 
 if(!$packsAvailable) {
@@ -148,7 +148,7 @@ if(!$packsAvailable) {
 	$generatePacksButton = true;
 } else if(!$updateBlocked && !$langsAvailable) {
     $noLangsIcon = 'info';
-    $noLangsCause = $s['noLangsAvailable'];
+    $noLangsCause = $s['noLangsAvailablev2'];
     $updateBlocked = true;
 }
 
