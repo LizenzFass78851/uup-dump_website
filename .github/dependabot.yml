@@ -1,7 +1,7 @@
 version: 2
 updates:
 
-  - package-ecosystem: gitsubmodule
+  - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
       interval: "daily"
@@ -10,3 +10,5 @@ updates:
       default-days: 0
     allow:
       - dependency-name: "public"
+    commit-message:
+      prefix: "Update"
