@@ -45,11 +45,17 @@ if(!isset($templateOk)) die();
             <i class="dropdown icon"></i>
 
             <div class="menu">
-                <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*263[4-9]0">
+                <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*2634\d">
                     26H2 Experimental
+                </a>
+                <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*2632\d">
+                    26H2 Beta
                 </a>
                 <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26300">
                     26H2
+                </a>
+                <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*281\d0">
+                    26H1 Experimental
                 </a>
                 <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*280\d0">
                     26H1 Beta
@@ -62,6 +68,9 @@ if(!isset($templateOk)) die();
                 </a>
                 <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26200">
                     25H2
+                </a>
+                <a class="item" href="known.php?q=regex:^(?!.*(?:Server|HCI)).*Insider.*261\d0">
+                    24H2 Beta
                 </a>
                 <a class="item" href="known.php?q=regex:^(?:(?!Insider|Server|HCI).)*26100">
                     24H2
